@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1e1e1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Notesok" />
+  <title>Notesok — offline markdown notes</title>
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Notes list">
+      <header class="sidebar-head">
+        <h1>Notesok</h1>
+        <button type="button" id="btn-new" class="btn-primary">New note</button>
+      </header>
+      <ul class="note-list" id="note-list"></ul>
+      <footer class="sidebar-foot">
+        <button type="button" id="btn-export-all" class="btn-ghost full-width">Export all (JSON)</button>
+      </footer>
+    </aside>
+
+    <main class="editor-panel" id="editor-panel">
+      <div class="empty-state" id="empty-state">
+        <p>Select a note or create a new one.</p>
+      </div>
+
+      <div class="editor-wrap" id="editor-wrap" hidden>
+        <div class="toolbar">
+          <input type="text" id="note-title" class="title-input" placeholder="Title" maxlength="200" aria-label="Note title" />
+          <div class="toolbar-actions">
+            <div class="tabs" role="tablist" aria-label="Editor or preview">
+              <button type="button" role="tab" id="tab-edit" class="tab active" aria-selected="true">Edit</button>
+              <button type="button" role="tab" id="tab-preview" class="tab" aria-selected="false">Preview</button>
+            </div>
+            <button type="button" id="btn-export-one" class="btn-ghost btn-sm">Export</button>
+            <button type="button" id="btn-delete" class="btn-ghost btn-sm danger">Delete</button>
+          </div>
+        </div>
+        <textarea id="note-body" class="note-body" placeholder="Write Markdown…" spellcheck="true" aria-label="Markdown body"></textarea>
+        <div id="note-preview" class="note-preview" hidden aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <p>Notes stay in <strong>localStorage</strong> on this device. <strong>marked</strong> is bundled in <code>vendor/</code> so preview works offline after the first load caches files.</p>
+    <p><strong>Install as app:</strong> Android — <em>Install app</em>. iPhone — Share → <em>Add to Home Screen</em>.</p>
+    <p class="footer-donate">
+      <a class="donate-link" href="https://github.com/sponsors/rafieq-afed" target="_blank" rel="noopener noreferrer">Donate / support us</a>
+    </p>
+  </footer>
+
+  <template id="tpl-note-row">
+    <li>
+      <button type="button" class="note-row" data-id="">
+        <span class="note-row-title"></span>
+        <span class="note-row-date"></span>
+      </button>
+    </li>
+  </template>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
